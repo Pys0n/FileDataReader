@@ -38,7 +38,7 @@ class FileDataReader:
     def _load_data(self) -> None:
         if self.file_extension in ['csv']:
             reader = CSVReader(self.file)
-        elif self.file_extension in ['html']:
+        elif self.file_extension in ['html', 'htm']:
             reader = HTMLReader(self.file)
         elif self.file_extension in ['json']:
             reader = JSONReader(self.file)
