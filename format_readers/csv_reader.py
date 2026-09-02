@@ -45,7 +45,7 @@ class CSVReader:
         
         self.data = {
             'full_file_name': self.file_name,
-            'file_name': ''.join(self.file_name.split('.')[:-1]),
+            'file_name': '.'.join(self.file_name.split('.')[:-1]),
             'file_extension': '.csv',
             'content': text[:-1],
             'table': table,
