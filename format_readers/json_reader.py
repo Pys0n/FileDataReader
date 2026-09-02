@@ -1,13 +1,13 @@
 import os, json
 
-class CSVReader:
+class JSONReader:
     def __init__(self, file: str, ignore_extension: bool = False) -> None:
         if not isinstance(file, str):
             raise TypeError(f'Expected `file` to be a str, got {type(file).__name__}')
         if not os.path.isfile(file):
             raise ValueError(f'file "{file}" does not exist')
-        if not ignore_extension and not file.endswith('.csv'):
-            raise ValueError(f'Expected `file` to be a .csv, got {file.split('.')[-1]}')
+        if not ignore_extension and not file.endswith('.json'):
+            raise ValueError(f'Expected `file` to be a .json, got {file.split('.')[-1]}')
 
         self.file = file
         self.file_name = file.replace('\\', '/').split('/')[-1]
@@ -36,17 +36,14 @@ class CSVReader:
 
     def _load_data(self) -> None:
         with open(self.file, 'r') as file:
-            text = ''
-            table = []
-            for line in file.readlines():
-                text += line + '\n'
-                table.append(line.split(','))
-
+            text = file.read()
+        with open(self.file, 'r') as file:
+            json_formated = json.load(file)
         
         self.data = {
             'full_file_name': self.file_name,
-            'file_name': ''.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.csv',
-            'content': text[:-1],
-            'table': table,
+            'file_name': '.'.join(self.file_name.split('.')[:-1]),
+            'file_extension': '.txt',
+            'content': text,
+            'formated': json_formated,
         }

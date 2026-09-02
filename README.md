@@ -15,5 +15,6 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 # List of implemented file types
 
 - [.csv](https://en.wikipedia.org/wiki/Comma-separated_values)
+- [.json](https://en.wikipedia.org/wiki/JSON)
 - [.tsv (.tab)](https://en.wikipedia.org/wiki/Tab-separated_values)
 - [.txt](https://en.wikipedia.org/wiki/Text_file)

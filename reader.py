@@ -1,6 +1,6 @@
-import os
+import os, json
 
-from format_readers import txt, tsv, csv
+from readers import *
 
 class FileDataReader:
     def __init__(self, file: str, file_extension: str = None) -> None:
@@ -37,11 +37,13 @@ class FileDataReader:
     
     def _load_data(self) -> None:
         if self.file_extension in ['csv']:
-            reader = csv.CSVReader(self.file)
+            reader = CSVReader(self.file)
+        elif self.file_extension in ['json']:
+            reader = JSONReader(self.file)
         elif self.file_extension in ['tsv', 'tab']:
-            reader = tsv.TSVReader(self.file)
+            reader = TSVReader(self.file)
         elif self.file_extension in ['txt']:
-            reader = txt.TXTReader(self.file)
+            reader = TXTReader(self.file)
         else:
             raise ValueError(f'Unknown file format: {self.file_extension}')
 
