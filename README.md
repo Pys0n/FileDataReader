@@ -18,3 +18,4 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.json](https://en.wikipedia.org/wiki/JSON)
 - [.tsv (.tab)](https://en.wikipedia.org/wiki/Tab-separated_values)
 - [.txt](https://en.wikipedia.org/wiki/Text_file)
+- [.xml](https://en.wikipedia.org/wiki/XML)

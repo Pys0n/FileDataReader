@@ -44,6 +44,8 @@ class FileDataReader:
             reader = TSVReader(self.file)
         elif self.file_extension in ['txt']:
             reader = TXTReader(self.file)
+        elif self.file_extension in ['xml']:
+            reader = XMLReader(self.file)
         else:
             raise ValueError(f'Unknown file format: {self.file_extension}')
 

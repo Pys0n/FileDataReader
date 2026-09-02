@@ -2,3 +2,4 @@ from format_readers.csv_reader import CSVReader
 from format_readers.json_reader import JSONReader
 from format_readers.tsv_reader import TSVReader
 from format_readers.txt_reader import TXTReader
+from format_readers.xml_reader import XMLReader
