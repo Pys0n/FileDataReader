@@ -44,6 +44,10 @@ class FileDataReader:
             reader = HTMLReader(self.file)
         elif self.file_extension in ['json']:
             reader = JSONReader(self.file)
+        elif self.file_extension in ['psv']:
+            reader = PSVReader(self.file)
+        elif self.file_extension in ['ssv']:
+            reader = SSVReader(self.file)
         elif self.file_extension in ['tsv', 'tab']:
             reader = TSVReader(self.file)
         elif self.file_extension in ['txt']:

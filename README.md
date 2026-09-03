@@ -18,6 +18,8 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.csv](https://en.wikipedia.org/wiki/Comma-separated_values)
 - [.html (.htm)](https://en.wikipedia.org/wiki/HTML)
 - [.json](https://en.wikipedia.org/wiki/JSON)
+- .psv (pipe-separated values)
+- .ssv (semicolon-separated values)
 - [.tsv (.tab)](https://en.wikipedia.org/wiki/Tab-separated_values)
 - [.txt](https://en.wikipedia.org/wiki/Text_file)
 - [.xml](https://en.wikipedia.org/wiki/XML)
