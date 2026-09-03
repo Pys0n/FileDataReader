@@ -14,14 +14,14 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 
 # List of implemented file types
 
-- [.bmp (.dib)](https://en.wikipedia.org/wiki/BMP_file_format)
+- [.bmp, .dib](https://en.wikipedia.org/wiki/BMP_file_format)
 - [.csv](https://en.wikipedia.org/wiki/Comma-separated_values)
-- [.html (.htm)](https://en.wikipedia.org/wiki/HTML)
+- [.html, .htm](https://en.wikipedia.org/wiki/HTML)
 - [.ini](https://en.wikipedia.org/wiki/INI_file)
 - [.json](https://en.wikipedia.org/wiki/JSON)
 - .psv (pipe-separated values)
 - .ssv (semicolon-separated values)
-- [.tsv (.tab)](https://en.wikipedia.org/wiki/Tab-separated_values)
+- [.tsv, .tab](https://en.wikipedia.org/wiki/Tab-separated_values)
 - [.txt](https://en.wikipedia.org/wiki/Text_file)
 - [.vcf](https://en.wikipedia.org/wiki/Variant_Call_Format)
 - [.xml](https://en.wikipedia.org/wiki/XML)
