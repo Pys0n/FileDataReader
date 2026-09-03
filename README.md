@@ -23,4 +23,5 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - .ssv (semicolon-separated values)
 - [.tsv (.tab)](https://en.wikipedia.org/wiki/Tab-separated_values)
 - [.txt](https://en.wikipedia.org/wiki/Text_file)
+- [.vcf](https://en.wikipedia.org/wiki/Variant_Call_Format)
 - [.xml](https://en.wikipedia.org/wiki/XML)

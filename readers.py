@@ -7,4 +7,5 @@ from format_readers.psv_reader import PSVReader
 from format_readers.ssv_reader import SSVReader
 from format_readers.tsv_reader import TSVReader
 from format_readers.txt_reader import TXTReader
+from format_readers.vcf_reader import VCFReader
 from format_readers.xml_reader import XMLReader

@@ -54,6 +54,8 @@ class FileDataReader:
             reader = TSVReader(self.file)
         elif self.file_extension in ['txt']:
             reader = TXTReader(self.file)
+        elif self.file_extension in ['vcf']:
+            reader = VCFReader(self.file)
         elif self.file_extension in ['xml']:
             reader = XMLReader(self.file)
         else:
