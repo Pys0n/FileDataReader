@@ -17,6 +17,7 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.bmp, .dib](https://en.wikipedia.org/wiki/BMP_file_format)
 - [.csv](https://en.wikipedia.org/wiki/Comma-separated_values)
 - [.html, .htm](https://en.wikipedia.org/wiki/HTML)
+- [.ical, .ics, .ifb, .icalendar](https://en.wikipedia.org/wiki/ICalendar)
 - [.ini](https://en.wikipedia.org/wiki/INI_file)
 - [.json](https://en.wikipedia.org/wiki/JSON)
 - .psv (pipe-separated values)

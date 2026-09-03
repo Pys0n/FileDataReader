@@ -6,8 +6,8 @@ class BMPReader:
             raise TypeError(f'Expected `file` to be a str, got {type(file).__name__}')
         if not os.path.isfile(file):
             raise ValueError(f'file "{file}" does not exist')
-        if not ignore_extension and not file.endswith('.bmp'):
-            raise ValueError(f'Expected `file` to be a .bmp, got {file.split('.')[-1]}')
+        if not ignore_extension and (not file.endswith('.bmp') and not file.endswith('.dib')):
+            raise ValueError(f'Expected `file` to be a .bmp or .dib, got {file.split('.')[-1]}')
 
         self.file = file
         self.file_name = file.replace('\\', '/').split('/')[-1]
@@ -34,11 +34,15 @@ class BMPReader:
         with open(self.file, 'rb') as file:
             content = ''.join(f'{byte:08b}' for byte in file.read())
         
+        file_extension = '.' + self.file_name.split('.')[-1]
+        if file_extension not in ['.bmp', '.dib']:
+            file_extension = '.bmp'
+
         info_header_size = int(self._reverse_bytes(content[112:144]), 2)
         self.data = {
             'full_file_name': self.file_name,
             'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.bmp',
+            'file_extension': file_extension,
             'content': {
                 'header': {
                     'signature':    self._bits_to_text(self._reverse_bytes(content[:16])),

@@ -42,6 +42,8 @@ class FileDataReader:
             reader = CSVReader(self.file)
         elif self.file_extension in ['html', 'htm']:
             reader = HTMLReader(self.file)
+        elif self.file_extension in ['ical', 'ics', 'ifb', 'icalendar']:
+            reader = ICSReader(self.file)
         elif self.file_extension in ['ini']:
             reader = INIReader(self.file)
         elif self.file_extension in ['json']:

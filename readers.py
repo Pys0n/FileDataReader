@@ -1,6 +1,7 @@
 from format_readers.bmp_reader import BMPReader
 from format_readers.csv_reader import CSVReader
 from format_readers.html_reader import HTMLReader
+from format_readers.ics_reader import ICSReader
 from format_readers.ini_reader import INIReader
 from format_readers.json_reader import JSONReader
 from format_readers.psv_reader import PSVReader

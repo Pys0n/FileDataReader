@@ -6,8 +6,8 @@ class HTMLReader:
             raise TypeError(f'Expected `file` to be a str, got {type(file).__name__}')
         if not os.path.isfile(file):
             raise ValueError(f'file "{file}" does not exist')
-        if not ignore_extension and not file.endswith('.html'):
-            raise ValueError(f'Expected `file` to be a .html, got {file.split('.')[-1]}')
+        if not ignore_extension and (not file.endswith('.html') and not file.endswith('.htm')):
+            raise ValueError(f'Expected `file` to be a .html or .htm, got {file.split('.')[-1]}')
 
         self.file = file
         self.file_name = file.replace('\\', '/').split('/')[-1]
@@ -40,10 +40,14 @@ class HTMLReader:
             splited = text.split('>')
             doctype = splited[0] + '>'
         
+        file_extension = '.' + self.file_name.split('.')[-1]
+        if file_extension not in ['.html', '.htm']:
+            file_extension = '.html'
+
         self.data = {
             'full_file_name': self.file_name,
             'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.html',
+            'file_extension': file_extension,
             'content': text,
             'DOCTYPE': doctype,
         }

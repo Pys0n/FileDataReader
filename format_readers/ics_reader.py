@@ -1,13 +1,13 @@
 import os, json
 
-class TSVReader:
+class ICSReader:
     def __init__(self, file: str, ignore_extension: bool = False) -> None:
         if not isinstance(file, str):
             raise TypeError(f'Expected `file` to be a str, got {type(file).__name__}')
         if not os.path.isfile(file):
             raise ValueError(f'file "{file}" does not exist')
-        if not ignore_extension and (not file.endswith('.tsv') and not file.endswith('.tab')):
-            raise ValueError(f'Expected `file` to be a .tsv or .tab, got {file.split('.')[-1]}')
+        if not ignore_extension and (not file.endswith('.ical') and not file.endswith('.ics') and not file.endswith('.ifb') and not file.endswith('.icalendar')):
+            raise ValueError(f'Expected `file` to be a .ical, .ics, .ifb or .icalendar, got {file.split('.')[-1]}')
 
         self.file = file
         self.file_name = file.replace('\\', '/').split('/')[-1]
@@ -36,20 +36,34 @@ class TSVReader:
 
     def _load_data(self) -> None:
         with open(self.file, 'r') as file:
-            text = ''
-            table = []
-            for line in file.readlines():
-                text += line + '\n'
-                table.append(line.split('\t'))
-
-        file_extension = '.' + self.file_name.split('.')[-1]
-        if file_extension not in ['.tsv', '.tab']:
-            file_extension = '.tsv'
+            text = file.read()
         
+        file_extension = '.' + self.file_name.split('.')[-1]
+        if file_extension not in ['.ical', '.ics', '.ifb', '.icalendar']:
+            file_extension = '.ics'
+
         self.data = {
             'full_file_name': self.file_name,
             'file_name': '.'.join(self.file_name.split('.')[:-1]),
             'file_extension': file_extension,
-            'content': text[:-1],
-            'table': table,
+            'content': {
+                'content': text,
+                'VCALENDAR': {
+
+                },
+            },
         }
+
+        paths = [self.data['content']['VCALENDAR']]
+        for line in text.split('\n')[1:-1]:
+            line = line.strip()
+            key = line.split(':')[0]
+            val = ':'.join(line.split(':')[1:])
+
+            if key == 'BEGIN':
+                paths[-1][val] = [{}]
+                paths.append(paths[-1][val][0])
+            elif key == 'END':
+                paths.pop(-1)
+            else:
+                paths[-1][key] = val
