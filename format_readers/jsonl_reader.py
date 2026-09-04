@@ -1,37 +1,12 @@
 import os, json
 
-class JSONLReader:
+from format_readers.reader_class import Reader
+
+class JSONLReader(Reader):
     def __init__(self, file: str, ignore_extension: bool = False) -> None:
-        if not isinstance(file, str):
-            raise TypeError(f'Expected `file` to be a str, got {type(file).__name__}')
-        if not os.path.isfile(file):
-            raise ValueError(f'file "{file}" does not exist')
-        if not ignore_extension and (not file.endswith('.ndjson') and not file.endswith('.ldjson') and not file.endswith('.jsonl')):
-            raise ValueError(f'Expected `file` to be a .ndjson, .ldjson or .jsonl, got {file.split('.')[-1]}')
+        super().__init__(file, ignore_extension, ['.ndjson', '.ldjson', '.jsonl'])
 
-        self.file = file
-        self.file_name = file.replace('\\', '/').split('/')[-1]
         self._load_data()
-
-
-    def get_content(self) -> str:
-        return self.data['content']
-    
-
-    def get_data(self) -> dict:
-        return self.data
-    
-
-    def to_json(self, file_name: str = None) -> None:
-        if file_name == None:
-            file_name = self.file + '.json'
-        if not isinstance(file_name, str):
-            raise TypeError(f'Expected `file_name` to be a str, got {type(file_name).__name__}')
-        if not file_name.endswith('.json'):
-            file_name += '.json'
-
-        with open(file_name, 'w') as file:
-            json.dump(self.data, file, indent=4)
 
 
     def _load_data(self) -> None:
