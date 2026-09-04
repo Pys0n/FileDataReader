@@ -20,7 +20,7 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.ical, .ics, .ifb, .icalendar (internet calendaring)](https://en.wikipedia.org/wiki/ICalendar)
 - [.ini](https://en.wikipedia.org/wiki/INI_file)
 - [.json (javascript object notation)](https://en.wikipedia.org/wiki/JSON)
-- [.jsonl, .ndjson, .ldjson (json lines / newlined-delimited json)](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON)
+- [.jsonl, .ndjson, .ldjson (json lines / newline-delimited json)](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON)
 - .psv (pipe-separated values)
 - .ssv (semicolon-separated values)
 - [.svg, .svgz (scalable vector graphics)](https://en.wikipedia.org/wiki/SVG)
