@@ -64,6 +64,8 @@ class FileDataReader:
             reader = VCFReader(self.file)
         elif self.file_extension in ['xml']:
             reader = XMLReader(self.file)
+        elif self.file_extension in ['xpm']:
+            reader = XPMReader(self.file)
         else:
             raise ValueError(f'Unknown file format: {self.file_extension}')
 

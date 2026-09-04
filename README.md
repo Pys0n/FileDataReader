@@ -28,3 +28,4 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.txt (text file)](https://en.wikipedia.org/wiki/Text_file)
 - [.vcf (variant call format)](https://en.wikipedia.org/wiki/Variant_Call_Format)
 - [.xml (extensible markup language)](https://en.wikipedia.org/wiki/XML)
+- [.xpm (x pixmap)](https://en.wikipedia.org/wiki/X_PixMap)
