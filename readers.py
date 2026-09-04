@@ -4,8 +4,10 @@ from format_readers.html_reader import HTMLReader
 from format_readers.ics_reader import ICSReader
 from format_readers.ini_reader import INIReader
 from format_readers.json_reader import JSONReader
+from format_readers.jsonl_reader import JSONLReader
 from format_readers.psv_reader import PSVReader
 from format_readers.ssv_reader import SSVReader
+from format_readers.svg_reader import SVGReader
 from format_readers.tsv_reader import TSVReader
 from format_readers.txt_reader import TXTReader
 from format_readers.vcf_reader import VCFReader

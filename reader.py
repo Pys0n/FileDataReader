@@ -48,10 +48,14 @@ class FileDataReader:
             reader = INIReader(self.file)
         elif self.file_extension in ['json']:
             reader = JSONReader(self.file)
+        elif self.file_extension in ['jsonl', 'ndjson', 'ldjson']:
+            reader = JSONLReader(self.file)
         elif self.file_extension in ['psv']:
             reader = PSVReader(self.file)
         elif self.file_extension in ['ssv']:
             reader = SSVReader(self.file)
+        elif self.file_extension in ['svg', 'svgz']:
+            reader = SVGReader(self.file)
         elif self.file_extension in ['tsv', 'tab']:
             reader = TSVReader(self.file)
         elif self.file_extension in ['txt']:
