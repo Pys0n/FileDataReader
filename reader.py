@@ -33,7 +33,9 @@ class FileDataReader:
 
     
     def _load_data(self) -> None:
-        if self.file_extension in ['.bmp', '.dib']:
+        if self.file_extension in ['.bin']:
+            reader = BINReader(self.file)
+        elif self.file_extension in ['.bmp', '.dib']:
             reader = BMPReader(self.file)
         elif self.file_extension in ['.csv']:
             reader = CSVReader(self.file)

@@ -14,6 +14,7 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 
 # List of implemented file types
 
+- [.bin (binary file)](https://en.wikipedia.org/wiki/Binary_file)
 - [.bmp, .dib (bitmap)](https://en.wikipedia.org/wiki/BMP_file_format)
 - [.csv (comma-separated values)](https://en.wikipedia.org/wiki/Comma-separated_values)
 - [.html, .htm (hypertext markup language)](https://en.wikipedia.org/wiki/HTML)
