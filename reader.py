@@ -52,6 +52,8 @@ class FileDataReader:
             reader = JSONLReader(self.file)
         elif self.file_extension in ['md', 'markdown']:
             reader = MDReader(self.file)
+        elif self.file_extension in ['pls']:
+            reader = PLSReader(self.file)
         elif self.file_extension in ['psv']:
             reader = PSVReader(self.file)
         elif self.file_extension in ['ssv']:
