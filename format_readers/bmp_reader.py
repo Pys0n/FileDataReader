@@ -12,10 +12,6 @@ class BMPReader(Reader):
     def _load_data(self) -> None:
         with open(self.file, 'rb') as file:
             content = ''.join(f'{byte:08b}' for byte in file.read())
-        
-        file_extension = '.' + self.file_name.split('.')[-1]
-        if file_extension not in ['.bmp', '.dib']:
-            file_extension = '.bmp'
 
         info_header_size = int(self._reverse_bytes(content[112:144]), 2)
         data = {
