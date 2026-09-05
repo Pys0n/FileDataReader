@@ -5,6 +5,7 @@ from format_readers.ics_reader import ICSReader
 from format_readers.ini_reader import INIReader
 from format_readers.json_reader import JSONReader
 from format_readers.jsonl_reader import JSONLReader
+from format_readers.md_reader import MDReader
 from format_readers.psv_reader import PSVReader
 from format_readers.ssv_reader import SSVReader
 from format_readers.svg_reader import SVGReader
