@@ -13,10 +13,7 @@ class VCFReader(Reader):
         with open(self.file, 'r') as file:
             text = file.read()
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.vcf',
+        data = {
             'content': {
                 'content': text,
             },
@@ -28,8 +25,8 @@ class VCFReader(Reader):
                 key = line[2:].split('=')[0]
                 val = '='.join(line.split('=')[1:])
                 if val.startswith('<') and val.endswith('>'):
-                    if key.strip() not in self.data['content']:
-                        self.data['content'][key.strip()] = []
+                    if key.strip() not in data['content']:
+                        data['content'][key.strip()] = []
 
                     data = val[1:-1].split(',')
                     xdata = {}
@@ -37,9 +34,9 @@ class VCFReader(Reader):
                         xkey = x.split('=')[0]
                         xval = '='.join(x.split('=')[1:]).replace('"', '').replace('\'', '')
                         xdata[xkey] = xval
-                    self.data['content'][key.strip()].append(xdata)
+                    data['content'][key.strip()].append(xdata)
                 else:
-                    self.data['content'][key.strip()] = val.strip()
+                    data['content'][key.strip()] = val.strip()
 
             elif line.startswith('#'):
                 while '  ' in line:
@@ -54,4 +51,6 @@ class VCFReader(Reader):
                     line = line.replace('  ', ' ')
                 table.append(line.split())
         
-        self.data['content']['table'] = table
+        data['content']['table'] = table
+
+        self.data.update(data)

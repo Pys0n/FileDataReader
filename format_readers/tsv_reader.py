@@ -16,15 +16,10 @@ class TSVReader(Reader):
             for line in file.readlines():
                 text += line + '\n'
                 table.append(line.split('\t'))
-
-        file_extension = '.' + self.file_name.split('.')[-1]
-        if file_extension not in ['.tsv', '.tab']:
-            file_extension = '.tsv'
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': file_extension,
+        data = {
             'content': text[:-1],
             'table': table,
         }
+
+        self.data.update(data)

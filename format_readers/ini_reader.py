@@ -13,10 +13,7 @@ class INIReader(Reader):
         with open(self.file, 'r') as file:
             text = file.read()
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.ini',
+        data = {
             'content': {
                 'content': text,
             },
@@ -32,7 +29,7 @@ class INIReader(Reader):
 
             elif line.startswith('[') and line.endswith(']'):
                 current_section = line[1:-1]
-                self.data['content'][current_section] = {}
+                data['content'][current_section] = {}
             
             elif line.endswith('\\'):
                 cached += line[:-1].strip()
@@ -45,7 +42,9 @@ class INIReader(Reader):
                 value = '='.join(line.split('=')[1:]).strip().split(' ;')[0].split(' #')[0].replace('"', '').replace('\'', '')
 
                 if current_section == None:
-                    self.data['content'][key] = value
+                    data['content'][key] = value
                 else:
-                    self.data['content'][current_section][key] = value
+                    data['content'][current_section][key] = value
                 
+        self.data.update(data)
+    

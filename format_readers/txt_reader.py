@@ -13,9 +13,8 @@ class TXTReader(Reader):
         with open(self.file, 'r') as file:
             text = file.read()
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.txt',
+        data = {
             'content': text,
         }
+
+        self.data.update(data)

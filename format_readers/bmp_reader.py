@@ -18,10 +18,7 @@ class BMPReader(Reader):
             file_extension = '.bmp'
 
         info_header_size = int(self._reverse_bytes(content[112:144]), 2)
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': file_extension,
+        data = {
             'content': {
                 'header': {
                     'signature':    self._bits_to_text(self._reverse_bytes(content[:16])),
@@ -71,40 +68,40 @@ class BMPReader(Reader):
         }
 
         current_pos = 432
-        if self.data['content']['info_header']['num_colors'] <= 8:
+        if data['content']['info_header']['num_colors'] <= 8:
             pixel = 0
-            self.data['content']['color_table'] = {}
-            self.data['binary']['color_table'] = {}
-            for _ in range(self.data['content']['info_header']['num_colors']):
-                self.data['content']['color_table'][str(pixel)] =   {}
-                self.data['binary']['color_table'][str(pixel)] =    {}
+            data['content']['color_table'] = {}
+            data['binary']['color_table'] = {}
+            for _ in range(data['content']['info_header']['num_colors']):
+                data['content']['color_table'][str(pixel)] =   {}
+                data['binary']['color_table'][str(pixel)] =    {}
                 
-                self.data['content']['color_table'][str(pixel)]['red'] =    int(self._reverse_bytes(content[current_pos:current_pos+1]), 2)
-                self.data['content']['color_table'][str(pixel)]['green'] =  int(self._reverse_bytes(content[current_pos+1:current_pos+2]), 2)
-                self.data['content']['color_table'][str(pixel)]['blue'] =   int(self._reverse_bytes(content[current_pos+2:current_pos+3]), 2)
+                data['content']['color_table'][str(pixel)]['red'] =    int(self._reverse_bytes(content[current_pos:current_pos+1]), 2)
+                data['content']['color_table'][str(pixel)]['green'] =  int(self._reverse_bytes(content[current_pos+1:current_pos+2]), 2)
+                data['content']['color_table'][str(pixel)]['blue'] =   int(self._reverse_bytes(content[current_pos+2:current_pos+3]), 2)
 
-                self.data['binary']['color_table'][str(pixel)]['red'] =         content[current_pos:current_pos+1]
-                self.data['binary']['color_table'][str(pixel)]['green'] =       content[current_pos+1:current_pos+2]
-                self.data['binary']['color_table'][str(pixel)]['blue'] =        content[current_pos+2:current_pos+3]
-                self.data['binary']['color_table'][str(pixel)]['reserved'] =    content[current_pos+3:current_pos+4]
+                data['binary']['color_table'][str(pixel)]['red'] =         content[current_pos:current_pos+1]
+                data['binary']['color_table'][str(pixel)]['green'] =       content[current_pos+1:current_pos+2]
+                data['binary']['color_table'][str(pixel)]['blue'] =        content[current_pos+2:current_pos+3]
+                data['binary']['color_table'][str(pixel)]['reserved'] =    content[current_pos+3:current_pos+4]
 
                 pixel += 1
                 current_pos += 4
         
         pixel_data = content[current_pos:]
 
-        self.data['binary']['pixel_data'] = {}
-        self.data['binary']['pixel_data']['content'] = pixel_data
-        self.data['content']['pixel_data'] = []
-        height, width = self.data['content']['info_header']['height'], self.data['content']['info_header']['width']
+        data['binary']['pixel_data'] = {}
+        data['binary']['pixel_data']['content'] = pixel_data
+        data['content']['pixel_data'] = []
+        height, width = data['content']['info_header']['height'], data['content']['info_header']['width']
         pos = 0
         for _ in range(height):
             row = []
             for _ in range(width):
-                if self.data['content']['info_header']['bits_per_pixel'] <= 8:
-                    pixel = self.data['content']['color_table'][str(int(self._reverse_bytes(pixel_data[pos:pos+self.data['content']['info_header']['bits_per_pixel']]), 2))]
+                if data['content']['info_header']['bits_per_pixel'] <= 8:
+                    pixel = data['content']['color_table'][str(int(self._reverse_bytes(pixel_data[pos:pos+data['content']['info_header']['bits_per_pixel']]), 2))]
                     row.append((pixel['red'], pixel['green'], pixel['blue']))
-                elif self.data['content']['info_header']['bits_per_pixel'] == 16:
+                elif data['content']['info_header']['bits_per_pixel'] == 16:
                     row.append(
                         (
                             8 * int(self._reverse_bytes(pixel_data[pos+10:pos+15]), 2),
@@ -112,7 +109,7 @@ class BMPReader(Reader):
                             8 * int(self._reverse_bytes(pixel_data[pos:pos+5]), 2),
                         )
                     )
-                elif self.data['content']['info_header']['bits_per_pixel'] == 24:
+                elif data['content']['info_header']['bits_per_pixel'] == 24:
                     row.append(
                         (
                             int(self._reverse_bytes(pixel_data[pos+16:pos+24]), 2),
@@ -121,10 +118,12 @@ class BMPReader(Reader):
                         )
                     )
         
-                pos += self.data['content']['info_header']['bits_per_pixel']
+                pos += data['content']['info_header']['bits_per_pixel']
             
-            self.data['content']['pixel_data'].insert(0, row)
-            #pos += 4 - (width * self.data['content']['info_header']['bits_per_pixel']) % 4
+            data['content']['pixel_data'].insert(0, row)
+            #pos += 4 - (width * data['content']['info_header']['bits_per_pixel']) % 4
+        
+        self.data.update(data)
 
     
     def _reverse_bytes(self, bits: str) -> str:

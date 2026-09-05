@@ -18,10 +18,9 @@ class CSVReader(Reader):
                 table.append(line.split(','))
 
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.csv',
+        data = {
             'content': text[:-1],
             'table': table,
         }
+
+        self.data.update(data)

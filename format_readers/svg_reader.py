@@ -14,31 +14,25 @@ class SVGReader(Reader):
             text = file.read()
             declaration = text.split('\n')[0]
 
-        file_extension = '.' + self.file_name.split('.')[-1]
-        if file_extension not in ['.svg', '.svgz']:
-            file_extension = '.svg'
-        
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': file_extension,
+
+        data = {
             'content': {
                 'content': text,
             },
         }
 
         if not '?xml' in declaration:
-            self.data['declaration'] = None
-            self.data['xml-version'] = None
-            self.data['encoding'] = None
-            self.data['standalone'] = None
+            data['declaration'] = None
+            data['xml-version'] = None
+            data['encoding'] = None
+            data['standalone'] = None
         else:
-            self.data['declaration'] = declaration
+            data['declaration'] = declaration
 
             dec = declaration.replace(' ', '').replace('\'', '"')
             for attribute in ['version', 'encoding', 'standalone']:
                 if attribute not in declaration:
-                    self.data[attribute] = None
+                    data[attribute] = None
                     continue
                 d = dec.split(attribute+'="')
                 val = ''
@@ -48,9 +42,9 @@ class SVGReader(Reader):
                     val += x
                 
                 if attribute == 'version':
-                    self.data['xml-' + attribute] = val
+                    data['xml-' + attribute] = val
                 else:
-                    self.data[attribute] = val
+                    data[attribute] = val
         
         svg = False
         for line in text.split('\n')[1:]:
@@ -64,4 +58,6 @@ class SVGReader(Reader):
                 key = line.split('=')[0]
                 val = '='.join(line.split('=')[1:])
 
-                self.data['content'][key] = val[1:-1] if val.startswith('"') or val.startswith('\'') else val
+                data['content'][key] = val[1:-1] if val.startswith('"') or val.startswith('\'') else val
+
+        self.data.update(data)

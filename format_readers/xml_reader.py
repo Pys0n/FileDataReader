@@ -14,25 +14,22 @@ class XMLReader(Reader):
             text = file.read()
             declaration = text.split('\n')[0]
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.xml',
+        data = {
             'content': text,
         }
 
         if not '?xml' in declaration:
-            self.data['declaration'] = None
-            self.data['version'] = None
-            self.data['encoding'] = None
-            self.data['standalone'] = None
+            data['declaration'] = None
+            data['version'] = None
+            data['encoding'] = None
+            data['standalone'] = None
         else:
-            self.data['declaration'] = declaration
+            data['declaration'] = declaration
 
             dec = declaration.replace(' ', '').replace('\'', '"')
             for attribute in ['version', 'encoding', 'standalone']:
                 if attribute not in declaration:
-                    self.data[attribute] = None
+                    data[attribute] = None
                     continue
                 d = dec.split(attribute+'="')
                 val = ''
@@ -41,4 +38,6 @@ class XMLReader(Reader):
                         break
                     val += x
                 
-                self.data[attribute] = val
+                data[attribute] = val
+
+        self.data.update(data)

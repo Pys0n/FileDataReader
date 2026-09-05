@@ -13,13 +13,8 @@ class MDReader(Reader):
         with open(self.file, 'r') as file:
             text = file.read()
         
-        file_extension = '.' + self.file_name.split('.')[-1]
-        if file_extension not in ['.md', '.markdown']:
-            file_extension = '.md'
-
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': file_extension,
+        data = {
             'content': text,
         }
+
+        self.data.update(data)

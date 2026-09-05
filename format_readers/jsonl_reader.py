@@ -17,14 +17,9 @@ class JSONLReader(Reader):
             for line in text.split('\n'):
                 formated.append(json.loads(line))
         
-        file_extension = '.' + self.file_name.split('.')[-1]
-        if file_extension not in ['.ndjson', '.ldjson', '.jsonl']:
-            file_extension = '.jsonl'
-
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': file_extension,
+        data = {
             'content': text,
             'formated': formated,
         }
+
+        self.data.update(data)

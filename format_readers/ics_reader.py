@@ -13,23 +13,14 @@ class ICSReader(Reader):
         with open(self.file, 'r') as file:
             text = file.read()
         
-        file_extension = '.' + self.file_name.split('.')[-1]
-        if file_extension not in ['.ical', '.ics', '.ifb', '.icalendar']:
-            file_extension = '.ics'
-
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': file_extension,
+        data = {
             'content': {
                 'content': text,
-                'VCALENDAR': {
-
-                },
+                'VCALENDAR': {},
             },
         }
 
-        paths = [self.data['content']['VCALENDAR']]
+        paths = [data['content']['VCALENDAR']]
         for line in text.split('\n')[1:-1]:
             line = line.strip()
             key = line.split(':')[0]
@@ -42,3 +33,6 @@ class ICSReader(Reader):
                 paths.pop(-1)
             else:
                 paths[-1][key] = val
+        
+        self.data.update(data)
+        

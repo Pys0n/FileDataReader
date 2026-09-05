@@ -13,10 +13,7 @@ class XPMReader(Reader):
         with open(self.file, 'r') as file:
             text = file.read()
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.txt',
+        data = {
             'content': {
                 'content': text,
             },
@@ -62,23 +59,25 @@ class XPMReader(Reader):
 
         width, height, colors, char_per_pixel = lines[0].split()
         width, height, colors, char_per_pixel = int(width), int(height), int(colors), int(char_per_pixel)
-        self.data['content']['width'] = width
-        self.data['content']['height'] = height
-        self.data['content']['colors'] = colors
-        self.data['content']['characters_per_pixel'] = char_per_pixel
-        self.data['content']['colors'] = {}
+        data['content']['width'] = width
+        data['content']['height'] = height
+        data['content']['colors'] = colors
+        data['content']['characters_per_pixel'] = char_per_pixel
+        data['content']['colors'] = {}
 
         read_colors = True
         for line in lines[1:2+colors]:
             for color_type in [' c ', ' m ', ' g ', ' s ']:
                 if color_type in line:
                     key, val = line.strip().split(color_type)
-                    self.data['content']['colors'][key] = (int(val[1:3], 16), int(val[3:5], 16), int(val[5:7], 16))
+                    data['content']['colors'][key] = (int(val[1:3], 16), int(val[3:5], 16), int(val[5:7], 16))
                     break
         
-        self.data['content']['pixel_data'] = []
+        data['content']['pixel_data'] = []
         for line in lines[2+colors:]:
             row = []
             for i in range(len(line) // char_per_pixel):
-                row.append(self.data['content']['colors'][line[i*char_per_pixel:i*char_per_pixel+char_per_pixel]])
-            self.data['content']['pixel_data'].append(row)
+                row.append(data['content']['colors'][line[i*char_per_pixel:i*char_per_pixel+char_per_pixel]])
+            data['content']['pixel_data'].append(row)
+
+        self.data.update(data)

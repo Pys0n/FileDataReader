@@ -15,10 +15,9 @@ class JSONReader(Reader):
         with open(self.file, 'r') as file:
             json_formated = json.load(file)
         
-        self.data = {
-            'full_file_name': self.file_name,
-            'file_name': '.'.join(self.file_name.split('.')[:-1]),
-            'file_extension': '.json',
+        data = {
             'content': text,
             'formated': json_formated,
         }
+
+        self.data.update(data)

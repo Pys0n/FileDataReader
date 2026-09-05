@@ -17,7 +17,21 @@ class Reader:
                 raise ValueError(f'Expected `file` to be a {' / '.join(extensions)}, got {file.split('.')[-1]}')
 
         self.file = file
-        self.file_name = file.replace('\\', '/').split('/')[-1]
+        file_name, file_extension = os.path.splitext(self.file)
+
+        if file_extension not in extensions:
+            file_extension = extensions[0]
+
+        self.data = {
+            'full_file_name': os.path.basename(self.file),
+            'file_name': file_name,
+            'file_extension': file_extension,
+            'file_path': os.path.abspath(self.file),
+            'file_size': os.path.getsize(self.file),
+            'last_modifed': os.stat(self.file).st_mtime,
+            'last_accessed': os.stat(self.file).st_mtime,
+            'created': os.stat(self.file).st_ctime,
+        }
 
 
     def get_content(self) -> str:
