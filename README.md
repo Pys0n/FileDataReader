@@ -29,5 +29,6 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.tsv, .tab (tab-separated values)](https://en.wikipedia.org/wiki/Tab-separated_values)
 - [.txt (text file)](https://en.wikipedia.org/wiki/Text_file)
 - [.vcf (variant call format)](https://en.wikipedia.org/wiki/Variant_Call_Format)
+- [.wav, .wave (waveform audio)](https://en.wikipedia.org/wiki/WAV)
 - [.xml (extensible markup language)](https://en.wikipedia.org/wiki/XML)
 - [.xpm (x pixmap)](https://en.wikipedia.org/wiki/X_PixMap)

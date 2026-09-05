@@ -12,10 +12,7 @@ class FileDataReader:
             raise TypeError(f'Expected `file_extension` to be a str, got {type(file_extension).__name__}')
         
         self.file = file
-        if file_extension != None:
-            self.file_extension = file_extension if not file_extension.startswith('.') else file_extension[1:]
-        else:
-            self.file_extension = self.file.split('.')[-1]
+        _, self.file_extension = os.path.splitext(self.file)
         self._load_data()
     
 
@@ -36,39 +33,41 @@ class FileDataReader:
 
     
     def _load_data(self) -> None:
-        if self.file_extension in ['bmp', 'dib']:
+        if self.file_extension in ['.bmp', '.dib']:
             reader = BMPReader(self.file)
-        elif self.file_extension in ['csv']:
+        elif self.file_extension in ['.csv']:
             reader = CSVReader(self.file)
-        elif self.file_extension in ['html', 'htm']:
+        elif self.file_extension in ['.html', '.htm']:
             reader = HTMLReader(self.file)
-        elif self.file_extension in ['ical', 'ics', 'ifb', 'icalendar']:
+        elif self.file_extension in ['.ical', '.ics', '.ifb', '.icalendar']:
             reader = ICSReader(self.file)
-        elif self.file_extension in ['ini']:
+        elif self.file_extension in ['.ini']:
             reader = INIReader(self.file)
-        elif self.file_extension in ['json']:
+        elif self.file_extension in ['.json']:
             reader = JSONReader(self.file)
-        elif self.file_extension in ['jsonl', 'ndjson', 'ldjson']:
+        elif self.file_extension in ['.jsonl', '.ndjson', '.ldjson']:
             reader = JSONLReader(self.file)
-        elif self.file_extension in ['md', 'markdown']:
+        elif self.file_extension in ['.md', '.markdown']:
             reader = MDReader(self.file)
-        elif self.file_extension in ['pls']:
+        elif self.file_extension in ['.pls']:
             reader = PLSReader(self.file)
-        elif self.file_extension in ['psv']:
+        elif self.file_extension in ['.psv']:
             reader = PSVReader(self.file)
-        elif self.file_extension in ['ssv']:
+        elif self.file_extension in ['.ssv']:
             reader = SSVReader(self.file)
-        elif self.file_extension in ['svg', 'svgz']:
+        elif self.file_extension in ['.svg', '.svgz']:
             reader = SVGReader(self.file)
-        elif self.file_extension in ['tsv', 'tab']:
+        elif self.file_extension in ['.tsv', '.tab']:
             reader = TSVReader(self.file)
-        elif self.file_extension in ['txt']:
+        elif self.file_extension in ['.txt']:
             reader = TXTReader(self.file)
-        elif self.file_extension in ['vcf']:
+        elif self.file_extension in ['.vcf']:
             reader = VCFReader(self.file)
-        elif self.file_extension in ['xml']:
+        elif self.file_extension in ['.wav', '.wave']:
+            reader = WAVReader(self.file)
+        elif self.file_extension in ['.xml']:
             reader = XMLReader(self.file)
-        elif self.file_extension in ['xpm']:
+        elif self.file_extension in ['.xpm']:
             reader = XPMReader(self.file)
         else:
             raise ValueError(f'Unknown file format: {self.file_extension}')

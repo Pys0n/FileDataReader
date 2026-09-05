@@ -13,5 +13,6 @@ from format_readers.svg_reader import SVGReader
 from format_readers.tsv_reader import TSVReader
 from format_readers.txt_reader import TXTReader
 from format_readers.vcf_reader import VCFReader
+from format_readers.wav_reader import WAVReader
 from format_readers.xml_reader import XMLReader
 from format_readers.xpm_reader import XPMReader
