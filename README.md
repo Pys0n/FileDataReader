@@ -24,6 +24,7 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.jsonl, .ndjson, .ldjson (json lines / newline-delimited json)](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON)
 - [.md, .markdown](https://en.wikipedia.org/wiki/Markdown)
 - [.pls](https://en.wikipedia.org/wiki/PLS_(file_format))
+- [.png (portable network graphics)](https://en.wikipedia.org/wiki/PNG) (**Attention!** The reader is currently unable to read the pixel data)
 - .psv (pipe-separated values)
 - .ssv (semicolon-separated values)
 - [.svg, .svgz (scalable vector graphics)](https://en.wikipedia.org/wiki/SVG)
