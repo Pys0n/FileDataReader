@@ -20,6 +20,7 @@ You can also save the data in a `.json`-file using this function: `.to_json()` o
 - [.html, .htm (hypertext markup language)](https://en.wikipedia.org/wiki/HTML)
 - [.ical, .ics, .ifb, .icalendar (internet calendaring)](https://en.wikipedia.org/wiki/ICalendar)
 - [.ini](https://en.wikipedia.org/wiki/INI_file)
+- [.itn (itinerary file)](https://en.wikipedia.org/wiki/Itinerary_file)
 - [.json (javascript object notation)](https://en.wikipedia.org/wiki/JSON)
 - [.jsonl, .ndjson, .ldjson (json lines / newline-delimited json)](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON)
 - [.md, .markdown](https://en.wikipedia.org/wiki/Markdown)

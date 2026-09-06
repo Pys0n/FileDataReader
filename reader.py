@@ -45,6 +45,8 @@ class FileDataReader:
             reader = ICSReader(self.file)
         elif self.file_extension in ['.ini']:
             reader = INIReader(self.file)
+        elif self.file_extension in ['.itn']:
+            reader = ITNReader(self.file)
         elif self.file_extension in ['.json']:
             reader = JSONReader(self.file)
         elif self.file_extension in ['.jsonl', '.ndjson', '.ldjson']:
